@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Update the tag{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        <h1>Update the tag</h1>
+        <form method="post" action="{% url 'jobs:create_tag' %}">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-2">
+                <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}
+                </label>
+                {{ field }}
+                <div class="text-danger">
+                    {{ field.errors }}
+                </div>
+            </div>
+            {% endfor %}
+            <input type="submit" class="btn btn-primary mt-2" value="Submit" />
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

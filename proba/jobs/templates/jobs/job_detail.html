@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Job Detail{% endblock title %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card text-center">
+            {% if request.user.is_superuser %}
+            <div class="card-header" x-data="{ apply_show: false}">
+                <button class="btn btn-outline-dark" x-on:click="apply_show = !apply_show">Delete</button>
+                <div class="text-justify" x-show="apply_show" x-cloak>
+                    <form action="{% url 'jobs:delete_job' job.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger mt-3"x-show="apply_show" x-cloak>This action is permanent, please confirm.</button>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+            <div class="card-header">
+                {{ job.company }}
+            </div>
+            <div class="card-body">
+                {% if job.logo %}
+                <img src="{{ job.logo.url }}" height="100rem">
+                {% else %}
+                <img src="/upload/noImage.jpeg" height="100rem">
+                {% endif %}
+                <h5 class="card-title">{{ job.title }}</h5>
+                <p class="mb-1">Tags:</p>
+                {% for tag in job.tags.all %}
+                <span class="badge rounded-pill bg-dark mb-3">{{ tag.name }}</span>
+                {% endfor %}
+                <p class="mb-1">Additional tags:</p>
+                {% for custom_tag in job.custom_tags %}
+                <span class="badge rounded-pill bg-secondary">{{ custom_tag }}</span>
+                {% endfor %}
+                <p class="card-text mt-3">{{ job.description }}</p>
+            </div>
+            {% if visitor %}
+            <div class="row">
+                <div class="col" x-data="{ apply_show: false}">
+                    <div>
+                        <button x-on:click="apply_show = !apply_show" class="btn btn-primary">Apply for
+                            position</button>
+                    </div>
+                    <div x-show="apply_show" x-cloak>
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            <div class="mb-2">
+                                <label for="{{ field.auto_id }}" class="form-label">{{ field.label }}
+                                </label>
+                                {{ field }}
+                                <div class="text-danger">
+                                    {{ field.errors }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <input type="submit" class="btn btn-primary mt-2" value="Send your application" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <button class="btn btn-primary" onclick="getMyJobs(url)"> Go back</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

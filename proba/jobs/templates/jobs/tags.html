@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}My Tags{% endblock title %}
+
+{% block content %}
+{% load static %}
+<script src="{% static 'jobs/script.js' %}"></script>
+<script>
+    let url="{% url 'jobs:tags_ajax' %}";
+    getPage(url);
+</script> 
+<div id="data_point"></div>
+
+{% endblock content %}

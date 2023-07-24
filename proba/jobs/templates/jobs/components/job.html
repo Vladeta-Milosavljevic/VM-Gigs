@@ -1,0 +1,22 @@
+<div class="col-sm-4 pb-3">
+    <div class="card" style="width: 24rem; height:24rem;">
+        <div class="card-body">
+            {% if job.logo %}
+            <img src="{{ job.logo.url }}" height="100rem">
+            {% else %}
+            <img src="/upload/noImage.jpeg" height="100rem">
+            {% endif %}
+            <a href="{% url 'jobs:job_detail' job.id %}"  class="link-dark stretched-link"><h5 class="card-title">{{ job.title }}</h5></a>
+            <p class="card-text">{{ job.company }}</p>
+            {% for tag in job.tags.all %}
+            <span class="badge rounded-pill bg-dark">{{ tag.name }}</span>
+            {% endfor %}
+            <br>
+            {% for custom_tag in job.custom_tags %}
+            <span class="badge rounded-pill bg-secondary">{{ custom_tag }}</span>
+            {% endfor %}
+            
+            <p class="card-text mt-2">{{ job.description }}</p>
+        </div>
+    </div>
+</div>

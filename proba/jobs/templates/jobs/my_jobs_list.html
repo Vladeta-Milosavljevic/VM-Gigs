@@ -1,0 +1,25 @@
+{% for job in jobs %}
+
+<div class="card mb-2">
+    <div class="card-header">
+        {{ job.title }}
+    </div>
+    <div class="card-body" x-data="{ apply_show: false}">
+        <p class="card-text">{{ job.description }}</p>
+        <div class="text-end">
+            <button onclick="getPage('/my_job_detail/' + {{ job.id }})" class="btn btn-info me-2">
+                Details
+            </button>
+            <a href="{% url 'jobs:update_job' job.id %}" class="btn btn-secondary me-2">Edit</a>
+            <button class="btn btn-danger" x-on:click="apply_show = !apply_show">Delete</button>
+        </div>
+        <div class="text-end" x-show="apply_show" x-cloak>
+            <form action="" method="post">
+                {% csrf_token %}
+            </form>
+            <button onclick="deleteData('/delete_job/' + {{ job.id }}, url)" class="btn btn-danger mt-3"
+                x-show="apply_show" x-cloak>This action is permanent, please confirm.</button>
+        </div>
+    </div>
+</div>
+{% endfor %}

@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'jobs:index' %}">VM Gigs</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link active" aria-current="page"
+                        href="{% url 'jobs:index' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'jobs:jobs_list' %}">List of jobs</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'jobs:create_job' %}">Post a job</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'jobs:my_jobs' %}">My jobs list</a></li>
+                {% if user.is_superuser %}
+                <div class="dropdown">
+                    <button class="btn nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Tag operations
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'jobs:list_tags' %}">Tags List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'jobs:create_tag' %}">Create Tag</a></li>
+                    </ul>
+                </div>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+
+                <form class="d-flex" role="search" href="{% url 'jobs:jobs_list' %}" method="GET">
+                    <input class="form-control me-2 ms-2" type="search" placeholder="Search" aria-label="Search"
+                        name="text">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+            </ul>
+        </div>
+    </div>
+</nav>
+

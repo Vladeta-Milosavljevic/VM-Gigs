@@ -1,0 +1,28 @@
+{% for tag in tags %}
+<div class="row justify-content-center">
+    <div class="col-5">
+        <div class="card mb-2">
+            <div class="card-header text-center">
+                {{ tag.name }}
+            </div>
+            <div class="card-body" x-data="{ apply_show: false}">
+                {% comment %} <p class="card-text text-center">{{ tag.name }}</p> {% endcomment %}
+                <div class="text-center">
+                    {% comment %} <a href="{% url 'jobs:update_tag' tag.id %}" class="btn btn-secondary me-2">Edit</a>
+                    {% endcomment %}
+                    <button class="btn btn-danger" x-on:click="apply_show = !apply_show">Delete</button>
+                </div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                </form>
+                <div class="text-center" x-show="apply_show" x-cloak>
+                    <button onclick="deleteData('/delete_tag/' + {{ tag.id }}, url)" class="btn btn-danger mt-3"
+                        x-show="apply_show" x-cloak>This action is permanent, please confirm.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endfor %}

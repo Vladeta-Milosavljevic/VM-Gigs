@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    {% load static %}
+    <script src="{% static 'js/jquery.js' %}"></script>
+    
+    {% load bootstrap5 %}
+
+    {% bootstrap_css %}
+
+    {% bootstrap_javascript %}
+
+    {% bootstrap_messages %}
+
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <style>
+        [x-cloak] {
+            display: none
+        }
+    </style>
+
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    
+    {% include "navbar.html" %}
+
+    <div class="container">
+        <div class="text-center mt-5">
+            <h1 class="mb-5">Personal Django project</h1>
+        </div>
+        {% block content %}{% endblock content %}
+    </div>
+
+    {% include 'footer.html' %}
+    
+</body>
+
+</html>
