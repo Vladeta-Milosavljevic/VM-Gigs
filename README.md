@@ -5,7 +5,9 @@ Example job listing site project made using Django, Alpine Js and Jquery
 
 ## This Project includes the following:
 
-* Registration with email verification, authentication and authorisation,
+* Registration with email verification,
+* Authentication,
+* Authorisation,
 * CRUD,
 * Search,
 * Pagination suitable for large number of pages,
