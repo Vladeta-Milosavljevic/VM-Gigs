@@ -66,7 +66,7 @@ pip install Pillow
 ```
 
 
-### Executing program
+### Executing the app
 
 * Activate virtual enviroment
 * Port for MySql is 3308, feel free to change to your local preferences
