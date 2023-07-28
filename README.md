@@ -89,8 +89,3 @@ python manage.py runserver
 
 Vladeta Milosavljevic
 
-
-
-## Acknowledgments
-
-Traversy media Laravel project (LaraGigs) was the ispiration for this Django project. My gratitude goes to Brad Traversy for both inspiration and guidance through many videos he made on the subject of Web Development.
