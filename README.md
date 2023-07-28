@@ -17,7 +17,7 @@ Example job listing site project made using Django, Alpine Js and Jquery
 
 ### Dependencies
 
-* virtial enviroment (example: virtualenv), pytohn, Django,MySql client and Pillow are required.
+* virtial enviroment (example: virtualenv), pytohn, Django, MySql client and Pillow are required.
 * Jquery and Alpine js are included in the project
 
 ### Installing
@@ -54,7 +54,6 @@ exampleName\Scripts\activate
 pip install Django
 ```
 
-
 * MySql client install
 
 ```
@@ -67,11 +66,19 @@ pip install mysqlclient
 pip install Pillow
 ```
 
+* Place the project folder in the same folder as the virtual enviroment
+* Navigate to the project folder in the ternimal
+* Setup the database and run the migration
+
+```
+python manage.py migrate
+```
+
 
 ### Executing the app
 
 * Activate virtual enviroment
-* Port for MySql is 3308, feel free to change to your local preferences
+* Port for MySql is 3308, feel free to change to your local preferences it the settings.py file
 
 ```
 exampleName\Scripts\activate
