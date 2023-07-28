@@ -74,7 +74,7 @@ pip install django-bootstrap-v5
 ```
 
 * Place the project folder in the same folder as the virtual enviroment
-* Navigate to the project folder in the ternimal
+* Navigate to the project's root folder in the ternimal
 * Setup the database and run the migration
 
 ```
