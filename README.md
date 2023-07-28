@@ -1,6 +1,6 @@
 # VM-Gigs
 
-Example job listing site project made using Django, Alpine Js and Jquery
+Example job listing site project made using Django, Alpine Js, Jquery and Bootstrap 5
 
 
 ## This Project includes the following:
@@ -64,6 +64,13 @@ pip install mysqlclient
 
 ```
 pip install Pillow
+```
+
+
+* Bootstrap 5 install
+
+```
+pip install django-bootstrap-v5
 ```
 
 * Place the project folder in the same folder as the virtual enviroment
