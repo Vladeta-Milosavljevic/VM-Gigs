@@ -18,7 +18,7 @@ def index_view(request):
 
 
 def jobs_list(request):
-    text = request.GET.get('text')
+    text = request.GET.get('text') if request.GET.get('text') else ''
     if text:
         jobs = []
         query = Job.objects.filter(
@@ -39,6 +39,7 @@ def jobs_list(request):
 
     page_obj, page_range, items_per_page = pagination(request, jobs)
     context = {
+        'text': text,
         'page_obj': page_obj,
         'page_range': page_range,
         'items_per_page': items_per_page
