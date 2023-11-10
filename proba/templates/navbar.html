@@ -32,6 +32,7 @@
 
                 <form class="d-flex" role="search" href="{% url 'jobs:jobs_list' %}" method="GET">
                     <input class="form-control me-2 ms-2" type="search" placeholder="Search" aria-label="Search"
+                    {% if text %} value='{{ text }}' {% endif %}
                         name="text">
                     <button class="btn btn-outline-light" type="submit">Search</button>
                 </form>
