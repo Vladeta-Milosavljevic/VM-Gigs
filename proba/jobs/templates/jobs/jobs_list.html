@@ -4,7 +4,9 @@
 
 {% block content %}
 <div class="row justify-content-center gap-3">
-   
+    {% if no_jobs_message %}
+    {% include 'jobs/components/no_jobs.html' with no_jobs_message=no_jobs_message %}
+    {% endif %}
     {% for job in page_obj %}
 
     {% include 'jobs/components/job.html' with job=job %}

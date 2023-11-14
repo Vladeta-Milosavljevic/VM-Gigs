@@ -30,8 +30,8 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
                 {% endif %}
 
-                <form class="d-flex" role="search" href="{% url 'jobs:jobs_list' %}" method="GET">
-                    <input class="form-control me-2 ms-2" type="search" placeholder="Search" aria-label="Search"
+                <form class="d-flex" role="search" action="{% url 'jobs:jobs_list' %}" method="GET">
+                    <input class="form-control me-2 ms-2" type="text" placeholder="Search" aria-label="Search"
                     {% if text %} value='{{ text }}' {% endif %}
                         name="text">
                     <button class="btn btn-outline-light" type="submit">Search</button>

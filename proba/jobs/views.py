@@ -16,33 +16,37 @@ from .helpers import send_application, pagination
 def index_view(request):
     return render(request, 'jobs/index.html', {'jobs': Job.objects.all().order_by('-id')[:3]})
 
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)
 
 def jobs_list(request):
     text = request.GET.get('text') if request.GET.get('text') else ''
     if text:
         jobs = []
-        query = Job.objects.filter(
+        jobs = Job.objects.filter(
             Q(title__icontains=text) |
             Q(company__icontains=text) |
             Q(tags__name__icontains=text) |
             Q(custom_tags__icontains=text) |
             Q(location__icontains=text)
-        ).all().order_by('-id')
-        for item in query:  # izbacivanje duplikata u pretrazi
-            if item not in jobs:
-                jobs.append(item)
+        ).all().order_by('-id').distinct()
+        # for item in query:  # izbacivanje duplikata u pretrazi
+        #     if item not in jobs:
+        #         jobs.append(item)
     else:
         jobs = Job.objects.all().order_by('-id')
 
     for job in jobs:
         job.custom_tags = job.custom_tags.split(',')
-
+        
+    no_jobs_message="No jobs match your search, please try again." if jobs.count() is 0 else None
     page_obj, page_range, items_per_page = pagination(request, jobs)
     context = {
         'text': text,
         'page_obj': page_obj,
         'page_range': page_range,
-        'items_per_page': items_per_page
+        'items_per_page': items_per_page,
+        'no_jobs_message':no_jobs_message
     }
     return render(request, 'jobs/jobs_list.html', context)
 
