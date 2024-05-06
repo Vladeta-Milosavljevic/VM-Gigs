@@ -23,7 +23,7 @@ def jobs_list(request):
     text = request.GET.get('text') if request.GET.get('text') else ''
     if text:
         jobs = []
-        jobs = Job.objects.filter(
+        jobs = Job.objects.prefetch_related('tags').filter(
             Q(title__icontains=text) |
             Q(company__icontains=text) |
             Q(tags__name__icontains=text) |
@@ -34,12 +34,12 @@ def jobs_list(request):
         #     if item not in jobs:
         #         jobs.append(item)
     else:
-        jobs = Job.objects.all().order_by('-id')
+        jobs = Job.objects.prefetch_related('tags').all().order_by('-id')
 
     for job in jobs:
         job.custom_tags = job.custom_tags.split(',')
         
-    no_jobs_message="No jobs match your search, please try again." if jobs.count() is 0 else None
+    no_jobs_message="No jobs match your search, please try again." if jobs.count() == 0 else None
     page_obj, page_range, items_per_page = pagination(request, jobs)
     context = {
         'text': text,
